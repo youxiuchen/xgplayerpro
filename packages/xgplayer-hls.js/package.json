@@ -1,0 +1,44 @@
+{
+  "name": "xgplayer-hls.js",
+  "version": "3.0.8",
+  "description": "xgplayer plugin for hls",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "libd": {
+    "umdName": "HlsJsPlugin"
+  },
+  "files": [
+    "dist",
+    "es"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bytedance/xgplayer.git"
+  },
+  "unpkgFiles": [
+    "dist"
+  ],
+  "keywords": [
+    "mp4",
+    "fmp4",
+    "player",
+    "video"
+  ],
+  "author": "yinguohui@bytedance.com",
+  "license": "MIT",
+  "dependencies": {
+    "deepmerge": "2.0.1",
+    "event-emitter": "^0.3.5",
+    "hls.js": "^1.0.7"
+  },
+  "peerDependencies": {
+    "xgplayer": ">=3.0.0-next.0",
+    "core-js": ">=3.12.1"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "xgplayer-subtitles",
+  "version": "3.0.8",
+  "description": "",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "sideEffects": [
+    "*.scss",
+    "*.css",
+    "**/*.css"
+  ],
+  "libd": {
+    "umdName": "XgSubtitle"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "files": [
+    "/es",
+    "/dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "unpkgFiles": [
+    "dist"
+  ],
+  "author": "hongqiongxing@bytedance.com",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "core-js": ">=3.12.1"
+  }
+}

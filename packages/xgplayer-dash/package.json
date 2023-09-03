@@ -1,0 +1,44 @@
+{
+  "name": "xgplayer-dash",
+  "version": "3.0.8",
+  "description": "xgplayer plugin for MPEG-DASH",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "sideEffects": false,
+  "libd": {
+    "umdName": "DashPlugin"
+  },
+  "files": [
+    "dist",
+    "es"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bytedance/xgplayer.git"
+  },
+  "keywords": [
+    "MPEG-DASH",
+    "mp4",
+    "fmp4",
+    "player",
+    "video"
+  ],
+  "author": "zhangxin.frontend@bytedance.com",
+  "license": "MIT",
+  "unpkgFiles": [
+    "dist"
+  ],
+  "dependencies": {
+    "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "xgplayer": "3.0.8",
+    "core-js": ">=3.12.1"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "xgplayer-shaka",
+  "version": "3.0.8",
+  "description": "xgplayer plugin for shaka-player",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "libd": {
+    "umdName": "ShakaPlugin"
+  },
+  "files": [
+    "dist",
+    "es"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "keywords": [
+    "mpeg-dash",
+    "shaka-player",
+    "player",
+    "video"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bytedance/xgplayer.git"
+  },
+  "unpkgFiles": [
+    "dist"
+  ],
+  "author": "zhangxin.frontend@bytedance.com",
+  "license": "MIT",
+  "dependencies": {
+    "shaka-player": "^2.4.0"
+  },
+  "peerDependencies": {
+    "xgplayer": ">3.0.0-next.0"
+  }
+}

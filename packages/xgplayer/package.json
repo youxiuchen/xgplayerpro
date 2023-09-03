@@ -1,0 +1,51 @@
+{
+  "name": "xgplayer",
+  "version": "3.0.8",
+  "description": "video player",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "sideEffects": [
+    "*.scss",
+    "*.css",
+    "**/*.css"
+  ],
+  "libd": {
+    "umdName": "Player"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "files": [
+    "dist",
+    "es",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "unpkg": "latest",
+  "unpkgFiles": [
+    "dist"
+  ],
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bytedance/xgplayer.git"
+  },
+  "author": "yinguohui@bytedance.com",
+  "license": "MIT",
+  "dependencies": {
+    "danmu.js": ">=1.1.6",
+    "delegate": "^3.2.0",
+    "downloadjs": "1.4.7",
+    "eventemitter3": "^4.0.7",
+    "xgplayer-subtitles": "3.0.8"
+  },
+  "peerDependencies": {
+    "core-js": ">=3.12.1"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "xgplayer-music",
+  "version": "3.0.8",
+  "description": "xgplayer plugin for music",
+  "main": "dist/index.min.js",
+  "module": "es/index.js",
+  "typings": "es/index.d.ts",
+  "libd": {
+    "umdName": "MusicPreset",
+    "closeUpdatePeerDeps": true
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "es",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  },
+  "unpkgFiles": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bytedance/xgplayer.git"
+  },
+  "keywords": [
+    "mp4",
+    "fmp4",
+    "player",
+    "video"
+  ],
+  "author": "yinguohui@bytedance.com",
+  "license": "MIT",
+  "dependencies": {
+    "deepmerge": "^2.0.1",
+    "eventemitter3": "^4.0.7"
+  },
+  "peerDependencies": {
+    "xgplayer": "3.0.8",
+    "core-js": ">=3.12.1"
+  }
+}
