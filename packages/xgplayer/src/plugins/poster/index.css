@@ -1,0 +1,39 @@
+.xgplayer .xgplayer-poster {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+.xgplayer .xgplayer-poster.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.xgplayer.xgplayer-playing .xgplayer-poster {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.xgplayer.xgplayer-is-enter .xgplayer-poster.xg-showplay, .xgplayer.xgplayer-playing .xgplayer-poster.xg-showplay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.xgplayer.xgplayer-nostart .xgplayer-poster, .xgplayer.xgplayer-ended .xgplayer-poster, .xgplayer.not-allow-autoplay .xgplayer-poster {
+  opacity: 1;
+  visibility: visible;
+}
+.xgplayer.xgplayer-nostart .xgplayer-poster.hide, .xgplayer.xgplayer-ended .xgplayer-poster.hide, .xgplayer.not-allow-autoplay .xgplayer-poster.hide {
+  opacity: 0;
+  visibility: hidden;
+}

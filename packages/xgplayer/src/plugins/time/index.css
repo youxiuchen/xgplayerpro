@@ -1,0 +1,46 @@
+.xgplayer .xgplayer-time {
+  min-width: 40px;
+  font-size: 14px;
+  font-family: PingFangSC-Semibold;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  line-height: 40px;
+}
+.xgplayer .xgplayer-time span {
+  display: inline-block;
+  line-height: 40px;
+  height: 40px;
+}
+.xgplayer .xgplayer-time span .time-min-width {
+  text-align: center;
+  min-width: 2ch;
+}
+.xgplayer .xgplayer-time span .time-min-width:first-child {
+  text-align: right;
+}
+.xgplayer .xgplayer-time span .time-min-width:last-child {
+  text-align: left;
+}
+.xgplayer .xgplayer-time .time-duration {
+  color: rgba(255, 255, 255, 0.5);
+}
+.xgplayer .xgplayer-time .time-live-tag {
+  display: none;
+}
+.xgplayer .xgplayer-time.xg-time-left {
+  margin-left: 0;
+}
+.xgplayer .xgplayer-time.xg-time-right {
+  margin-right: 0;
+}
+.xgplayer.xgplayer-mobile .xgplayer-time {
+  min-width: 30px;
+  font-size: 12px;
+}
+.xgplayer.xgplayer-mobile .xgplayer-time.xg-time-left {
+  margin-right: 8px;
+}
+.xgplayer.xgplayer-mobile .xgplayer-time.xg-time-right {
+  margin-left: 8px;
+}

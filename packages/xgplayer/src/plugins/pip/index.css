@@ -1,0 +1,12 @@
+.xgplayer .xgplayer-pip .xg-exit-pip {
+  display: none;
+}
+.xgplayer .xgplayer-pip .xg-get-pip {
+  display: block;
+}
+.xgplayer .xgplayer-pip[data-state=pip] .xg-exit-pip {
+  display: block;
+}
+.xgplayer .xgplayer-pip[data-state=pip] .xg-get-pip {
+  display: none;
+}

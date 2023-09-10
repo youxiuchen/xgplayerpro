@@ -1,0 +1,190 @@
+@charset "UTF-8";
+.xgplayer {
+  /**  xg-spot-info start**/
+  /* 时间预览样式 */
+  /**  xg-spot-info end**/
+}
+.xgplayer .xgplayer-spot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #fff;
+  border-radius: 12px;
+}
+.xgplayer .xgplayer-spot.mini {
+  min-width: 6px;
+  transform: translate(-50%, 0);
+}
+.xgplayer .xgplayer-spot.active .xgplayer-spot-pop {
+  display: block;
+  opacity: 1;
+  pointer-events: initial;
+}
+.xgplayer .xgplayer-spot-pop {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  padding-bottom: 5px;
+  transform: translateX(-50%);
+}
+.xgplayer-mobile .xgplayer-spot {
+  height: 3px;
+  min-width: 3px;
+  top: 50%;
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.xgplayer-mobile .xgplayer-spot.mini {
+  min-width: 3px;
+  transform: translate(-50%, -50%);
+}
+
+.xgplayer .xgplayer-progress.active .xgplayer-spot {
+  opacity: 1;
+  transition: opacity 0.3s;
+  visibility: visible;
+}
+.xgplayer .xg-spot-info {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  display: none;
+}
+.xgplayer .xg-spot-info.short-line .xg-spot-line {
+  height: 6px;
+}
+.xgplayer .xg-spot-info.short-line .xg-spot-content {
+  bottom: -4px;
+}
+.xgplayer .xg-spot-info.no-thumbnail .xg-spot-thumbnail {
+  display: none;
+}
+.xgplayer .xg-spot-info.no-thumbnail .xgplayer-progress-point {
+  display: block;
+}
+.xgplayer .xg-spot-info.no-timepoint .xgplayer-progress-point {
+  display: none;
+}
+.xgplayer .xg-spot-info.hide {
+  display: none;
+}
+.xgplayer .xgplayer-progress.active .xg-spot-info {
+  display: block;
+}
+.xgplayer .xgplayer-progress.active .xg-spot-info.hide {
+  display: none;
+}
+.xgplayer .xg-spot-line {
+  position: relative;
+  bottom: -7px;
+  margin-left: 50%;
+  display: block;
+  width: 1px;
+  height: 41px;
+  background-color: #FFF;
+  pointer-events: none;
+}
+.xgplayer .xgplayer-progress-point {
+  display: none;
+  position: relative;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.54);
+  font-size: 11px;
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+.xgplayer .xg-spot-content {
+  position: relative;
+  bottom: -7px;
+  color: #fff;
+  border-radius: 2px 2px 0px 0px;
+}
+.xgplayer .xg-spot-ext-text {
+  position: relative;
+  bottom: -7px;
+}
+.xgplayer .xg-spot-thumbnail {
+  position: relative;
+  background-color: rgb(17, 16, 16);
+  pointer-events: none;
+  border-radius: 2px 2px 0 0;
+}
+.xgplayer .xg-spot-time {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  font-size: 12px;
+  line-height: 16.8px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.xgplayer .progress-thumbnail {
+  margin: 0 auto;
+  display: block;
+}
+.xgplayer .xg-spot-text {
+  display: none;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0px 0px 2px 2px;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+.xgplayer .spot-inner-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 20px;
+  font-size: 12px;
+  max-height: 40px;
+}
+.xgplayer .xg-spot-content.show-text .xg-spot-text {
+  display: block;
+}
+.xgplayer .product .xg-spot-text {
+  background: #3370FF;
+}
+.xgplayer .product .xg-spot-line {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 7px solid #3370FF;
+  width: 0;
+  height: 15px;
+  left: -10px;
+  background: none;
+}
+.xgplayer .xgvideo-preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.3s, opacity 0.3s;
+  background-color: #000;
+}
+.xgplayer .xgvideo-preview .xgvideo-thumbnail {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0;
+}
+.xgplayer .xgvideo-preview.show {
+  opacity: 1;
+  visibility: visible;
+}

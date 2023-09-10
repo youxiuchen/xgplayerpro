@@ -1,0 +1,22 @@
+.xgplayer .xgplayer-playnext {
+  position: relative;
+  display: none;
+  cursor: pointer;
+}
+.xgplayer .xgplayer-playnext .xgplayer-tips .xgplayer-tip-playnext {
+  display: block;
+}
+.xgplayer .xgplayer-playnext:hover {
+  opacity: 0.85;
+}
+.xgplayer .xgplayer-playnext:hover .xgplayer-tips {
+  display: block;
+}
+
+.lang-is-en .xgplayer-playnext .xgplayer-tips {
+  margin-left: -25px;
+}
+
+.lang-is-jp .xgplayer-playnext .xgplayer-tips {
+  margin-left: -38px;
+}

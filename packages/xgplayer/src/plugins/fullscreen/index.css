@@ -1,0 +1,23 @@
+.xgplayer .xgplayer-fullscreen .xg-exit-fullscreen {
+  display: none;
+}
+.xgplayer .xgplayer-fullscreen .xg-get-fullscreen {
+  display: block;
+}
+.xgplayer .xgplayer-fullscreen[data-state=full] .xg-exit-fullscreen {
+  display: block;
+}
+.xgplayer .xgplayer-fullscreen[data-state=full] .xg-get-fullscreen {
+  display: none;
+}
+.xgplayer .xg-top-bar .xgplayer-back {
+  position: relative;
+  left: 0;
+  top: 16px;
+  width: 34px;
+  height: 40px;
+  display: none;
+}
+.xgplayer .xg-top-bar .xgplayer-back.show {
+  display: block;
+}

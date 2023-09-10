@@ -22,7 +22,7 @@ var cachedOpt = localStorage.getItem('xg:test:flv:opt')
 try { cachedOpt = JSON.parse(cachedOpt) } catch (error) { cachedOpt = undefined }
 var opts = Object.assign({
   // url: 'https://1011.hlsplay.aodianyun.com/demo/game.flv',
-  url: 'http://114.116.122.72:8000/flv/live/34020000001320000108_34020000001320000108_0200000108.flv',
+  url: 'ws://114.116.122.72:8000/ws_flv/live/34020000001320000104_34020000001320000104_0200000104.flv',
 }, defaultOpt(), cachedOpt)
 var testPoint = Number(localStorage.getItem('xg:test:flv:point'))
 

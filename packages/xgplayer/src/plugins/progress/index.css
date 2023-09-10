@@ -1,0 +1,234 @@
+@charset "UTF-8";
+.xgplayer {
+  /* 滑块样式 */
+  /* 进度条打点*/
+}
+.xgplayer .xgplayer-progress {
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-width: 50px;
+  height: 12px;
+  left: 0;
+  right: 0;
+  top: 0;
+  outline: none;
+  flex: 1;
+  cursor: pointer;
+}
+.xgplayer .xgplayer-progress-outer {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.xgplayer .progress-list {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+.xgplayer .xgplayer-progress-inner {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: height 0.2s ease-in, opacity 0.2s ease-out;
+  border-radius: inherit;
+  margin-right: 2px;
+  pointer-events: none;
+}
+.xgplayer .xgplayer-progress-inner:last-child, .xgplayer .xgplayer-progress-inner:only-child {
+  margin-right: 0;
+}
+.xgplayer .inner-focus-point {
+  background: #fff;
+  position: relative;
+}
+.xgplayer .inner-focus-point:before, .xgplayer .inner-focus-point:after {
+  position: absolute;
+  top: 0;
+  content: " ";
+  display: block;
+  width: 2px;
+  height: 300%;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  border-radius: 3px;
+  background: #fff;
+}
+.xgplayer .inner-focus-point:before {
+  left: 0;
+}
+.xgplayer .inner-focus-point:after {
+  right: 0;
+}
+.xgplayer .xgplayer-progress-cache, .xgplayer .xgplayer-progress-played {
+  display: block;
+  height: 100%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+}
+.xgplayer .xgplayer-progress-played {
+  background: linear-gradient(-90deg, #FA1F41 0%, #E31106 100%);
+}
+.xgplayer .xgplayer-progress-cache {
+  background: rgba(255, 255, 255, 0.5);
+}
+.xgplayer .xgplayer-progress-btn {
+  display: block;
+  background: rgba(255, 94, 94, 0.304093);
+  border: 0.5px solid rgba(255, 94, 94, 0.056545);
+  box-shadow: 0px 0px 1px rgba(255, 0, 0, 0.382897);
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+  left: 0;
+  top: 50%;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.xgplayer .xgplayer-progress-btn:before {
+  content: " ";
+  display: block;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  background: #FFFFFF;
+}
+.xgplayer .xgplayer-progress-btn.active {
+  border: 4px solid rgba(255, 94, 94, 0.064057);
+}
+.xgplayer .xgplayer-progress-btn.active:before {
+  box-shadow: 0px 0px 3px rgba(248, 89, 89, 0.689);
+}
+.xgplayer .xgplayer-progress-dot {
+  display: inline-block;
+  position: absolute;
+  height: 100%;
+  width: 5px;
+  top: 0px;
+  background: white;
+  border-radius: 6px;
+  z-index: 16;
+}
+.xgplayer .xgplayer-progress-dot .xgplayer-progress-tip {
+  position: absolute;
+  left: 25%;
+  top: -40px;
+  height: auto;
+  line-height: 30px;
+  width: auto;
+  transform: scale(0.8) translateX(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  cursor: default;
+  white-space: nowrap;
+  display: none;
+}
+.xgplayer .xgplayer-progress-dot:hover .xgplayer-progress-tip {
+  display: block;
+}
+.xgplayer .flex-controls .xgplayer-progress {
+  transform: translateY(0);
+}
+.xgplayer.xgplayer-pc .xgplayer-progress-btn {
+  transform: translate(-50%, -50%) scale(0);
+}
+.xgplayer.xgplayer-pc .xgplayer-progress-outer {
+  height: 3px;
+}
+.xgplayer.xgplayer-pc .xgplayer-progress-inner {
+  margin-right: 4px;
+}
+.xgplayer.xgplayer-pc .xgplayer-progress-inner:last-child, .xgplayer.xgplayer-pc .xgplayer-progress-inner:only-child {
+  margin-right: 0;
+}
+.xgplayer.xgplayer-pc .inner-focus-point:before, .xgplayer.xgplayer-pc .inner-focus-point:after {
+  width: 3px;
+}
+.xgplayer.xgplayer-pc .inner-focus-highlight {
+  background: rgba(255, 255, 255, 0.8);
+}
+.xgplayer.xgplayer-pc .xgplayer-progress.active .xgplayer-progress-outer {
+  height: 6px;
+  margin-bottom: 3px;
+  transition: height 0.3s ease, margin-bottom 0.3s ease;
+}
+.xgplayer.xgplayer-pc .xgplayer-progress.active .xgplayer-progress-btn {
+  transform: translate(-50%, -50%) scale(1);
+}
+.xgplayer.xgplayer-pc .xgplayer-progress.active .inner-focus-point:before, .xgplayer.xgplayer-pc .xgplayer-progress.active .inner-focus-point:after {
+  width: 6px;
+}
+.xgplayer .xgplayer-progress-bottom .xgplayer-progress-outer {
+  top: 9px;
+}
+.xgplayer .xgplayer-progress-bottom .xgplayer-progress-btn:before {
+  height: 6px;
+  width: 6px;
+}
+.xgplayer.xgplayer-mobile .xgplayer-progress-bottom .xgplayer-progress-outer {
+  height: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  .xgplayer .xgplayer-progress .xgplayer-progress-inner {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  .xgplayer .xgplayer-progress .inner-focus-highlight {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .xgplayer .xgplayer-progress .xgplayer-progress-btn {
+    background: rgba(255, 94, 94, 0.304093);
+    border: 0.5px solid rgba(255, 94, 94, 0.056545);
+    box-shadow: 0px 0px 1px rgba(255, 0, 0, 0.382897);
+  }
+  .xgplayer .xgplayer-progress .xgplayer-progress-btn:before {
+    background-color: #fff;
+  }
+  .xgplayer .xgplayer-progress .xgplayer-progress-played {
+    background-color: linear-gradient(-90deg, #FA1F41 0%, #E31106 100%);
+  }
+  .xgplayer .xgplayer-progress .xgplayer-progress-cache {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+.xg-mini-progress {
+  display: none;
+  position: absolute;
+  height: 2px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  pointer-events: none;
+}
+.xg-mini-progress xg-mini-progress-played, .xg-mini-progress xg-mini-progress-cache {
+  height: 100%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+}
+.xg-mini-progress xg-mini-progress-played {
+  background: linear-gradient(-90deg, #FA1F41 0%, #E31106 100%);
+}
+.xg-mini-progress xg-mini-progress-cache {
+  background: rgba(255, 255, 255, 0.5);
+}
+.xgplayer-inactive .xg-mini-progress, .xgplayer-mini .xg-mini-progress {
+  display: block;
+}
