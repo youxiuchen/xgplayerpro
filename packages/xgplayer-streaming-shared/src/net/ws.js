@@ -1,5 +1,5 @@
 import { NetError } from './error'
-import { createResponse, getRangeValue, setUrlParams, calculateSpeed } from './helper'
+import { createResponse, setUrlParams, calculateSpeed } from './helper'
 import { ResponseType } from './types'
 import { EVENT } from '../event'
 import EventEmitter from 'eventemitter3'
@@ -20,6 +20,8 @@ export class WsLoader extends EventEmitter {
   _onProcessMinLen = 0
   _onCancel = null
   _priOptions = null // 比较私有化的参数传递，回调时候透传
+  _startTime = null
+  _endTime = null
 
   constructor () {
     super()
@@ -78,21 +80,23 @@ export class WsLoader extends EventEmitter {
     }
 
     const startTime = Date.now()
-    this._logger.debug('[websocket load start], index,', index, ',range,', range)
 
     return new Promise((resolve, reject) => {
       this._socket = new WebSocket(url)
-
+      this._socket.binaryType = responseType
+      this._logger.debug('[websocket load start], index,', index, ',ws,', this._socket)
       this._socket.onopen = () => {
         clearTimeout(this._timeoutTimer)
         if (this._aborted || !this._running) return
-        this._logger.debug('[websocket connected]')
+        this._logger.debug('[websocket connected],ws',this._socket)
 
+        this._startTime = Date.now()
         const firstByteTime = Date.now()
 
-        this._socket.onmessage = async (event) => {
+        this._socket.onmessage = (event) => {
+          this._startTime = this._endTime || this._startTime
+          this._endTime = Date.now()
           if (this._aborted || !this._running) return
-
           let data
           if (responseType === ResponseType.TEXT) {
             data = event.data
@@ -104,7 +108,7 @@ export class WsLoader extends EventEmitter {
             if (onProgress) {
               this.resolve = resolve
               this.reject = reject
-              this._loadChunk(event.data, onProgress, startTime, firstByteTime)
+              this._loadChunk(new Uint8Array(event.data), onProgress,startTime,firstByteTime)
               return
             } else {
               data = new Uint8Array(event.data)
@@ -132,8 +136,12 @@ export class WsLoader extends EventEmitter {
           ))
         }
       }
-
+      this._socket.onclose = (e)=>{
+        this._endTime = null
+        this._startTime = null
+      }
       this._socket.onerror = (error) => {
+        this._endTime = Date.now()
         clearTimeout(this._timeoutTimer)
         this._running = false
         if (this._aborted && !isTimeout) return
@@ -166,36 +174,35 @@ export class WsLoader extends EventEmitter {
     }
   }
 
-  _loadChunk (data, onProgress, st, firstByteTime) {
+  _loadChunk (data, onProgress,st, firstByteTime,intervalTime) {
     if (this._onProcessMinLen > 0) {
       this._cache = new Uint8Array(CACHESIZE)
       this._writeIdx = 0
     }
-
-    let startTime
-    let endTime
     const startRange = this._range?.length > 0 ? this._range[0] : 0
     const startByte = startRange + this._receivedLength
-
     if (this._aborted) {
       this._running = false
-      onProgress(undefined, false, { range: [startByte, startByte], vid: this._vid, index: this._index, startTime, endTime, st, firstByteTime, priOptions: this._priOptions })
+      onProgress(undefined, false, { range: [startByte, startByte], vid: this._vid, index: this._index, startTime:this._startTime, endTime: this._endTime, st, firstByteTime, priOptions: this._priOptions })
       return
     }
 
     const curLen = data.byteLength
     this._receivedLength += curLen
 
-    this._logger.debug('【WsLoader,onProgress call】,task,', this._range, ', start,', startByte, ', end,', startRange + this._receivedLength, ', done,', true)
+    const _done = [2,3].indexOf(this._socket.readyState) > 0
+    this._logger.debug('【WsLoader,onProgress call】,task,', this._range, ', start,', startByte, ', end,', startRange + this._receivedLength, ', done,', _done)
 
     let retData
+
+
     if (this._onProcessMinLen > 0) {
-      if (this._writeIdx + curLen >= this._onProcessMinLen || true) {
+      if (this._writeIdx + curLen >= this._onProcessMinLen || _done) {
         retData = new Uint8Array(this._writeIdx + curLen)
         retData.set(this._cache.slice(0, this._writeIdx), 0)
         curLen > 0 && retData.set(data, this._writeIdx)
         this._writeIdx = 0
-        this._logger.debug('【WsLoader,onProgress enough】,done,', true, ',len,', retData.byteLength, ', writeIdx,', this._writeIdx)
+        this._logger.debug('【WsLoader,onProgress enough】,done,', _done, ',len,', retData.byteLength, ', writeIdx,', this._writeIdx)
       } else {
         if (curLen > 0 && this._writeIdx + curLen < CACHESIZE) {
           this._cache.set(data, this._writeIdx)
@@ -216,39 +223,41 @@ export class WsLoader extends EventEmitter {
       retData = data
     }
 
-    if (retData && retData.byteLength > 0 || true) {
-      onProgress(retData, true, {
+    if (retData && retData.byteLength > 0 || _done) {
+      onProgress(retData, _done, {
         range: [this._range[0] + this._receivedLength - (retData ? retData.byteLength : 0), this._range[0] + this._receivedLength],
         vid: this._vid,
         index: this._index,
-        startTime,
-        endTime,
+        startTime:this._startTime,
+        endTime:this._endTime,
         st,
         firstByteTime,
         priOptions: this._priOptions
       }, null)
     }
 
-    const costTime = Date.now() - st
-    const speed = calculateSpeed(this._receivedLength, costTime)
-    this.emit(EVENT.REAL_TIME_SPEED, { speed, len: this._receivedLength, time: costTime, vid: this._vid, index: this._index, range: this._range, priOptions: this._priOptions })
+    if (_done){
+      const costTime = Date.now() - st
+      const speed = calculateSpeed(this._receivedLength, costTime)
+      this.emit(EVENT.REAL_TIME_SPEED, { speed, len: this._receivedLength, time: costTime, vid: this._vid, index: this._index, range: this._range, priOptions: this._priOptions })
 
-    this._running = false
-    this._logger.debug('[WsLoader onProgress end],task,', this._range, ',done,', true)
+      this._running = false
+      this._logger.debug('[WsLoader onProgress end],task,', this._range, ',done,', true)
 
-    this.resolve(createResponse(
-      retData,
-      true,
-      null,
-      null,
-      null,
-      st,
-      firstByteTime,
-      this._index,
-      this._range,
-      this._vid,
-      this._priOptions
-    ))
+      this.resolve(createResponse(
+        retData,
+        true,
+        null,
+        null,
+        null,
+        st,
+        firstByteTime,
+        this._index,
+        this._range,
+        this._vid,
+        this._priOptions
+      ))
+    }
   }
 
   get receiveLen () {

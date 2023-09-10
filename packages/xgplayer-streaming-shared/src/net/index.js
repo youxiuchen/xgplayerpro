@@ -27,14 +27,11 @@ export class NetLoader extends EventEmitter {
   constructor (cfg) {
     super(cfg)
     this._config = getConfig(cfg)
-    const _isWebSocketURL = !!this.isWebSocketURL(cfg.url)
     if (
       this._config.loaderType === LoaderType.XHR ||
       (!FetchLoader.isSupported() && !WsLoader.isSupported())
     ) {
       this.type = LoaderType.XHR
-    } else if ((this._config.loaderType === LoaderType.Ws || _isWebSocketURL) && WsLoader.isSupported()){
-      this.type = LoaderType.WS
     }
     this.log = cfg.logger
   }
@@ -60,12 +57,18 @@ export class NetLoader extends EventEmitter {
   }
 
   load (url, config = {}) {
+    let _isWebSocketURL = false
     if (typeof url === 'string' || !url) {
       config.url = url || config.url || this._config.url
+      _isWebSocketURL = !!this.isWebSocketURL(config.url)
     } else {
       config = url
+      _isWebSocketURL = !!this.isWebSocketURL(config.url)
     }
-
+    if ((this._config.loaderType === LoaderType.WS || _isWebSocketURL ) && WsLoader.isSupported()){
+      this.type = LoaderType.WS
+      this._config.loaderType = config.loaderType = LoaderType.WS
+    }
     config = Object.assign({}, this._config, config)
     if (config.params) config.params = Object.assign({}, config.params)
     if (config.headers && isPlainObject(config.headers)) config.headers = Object.assign({}, config.headers)

@@ -220,6 +220,7 @@ export class FetchLoader extends EventEmitter {
       startTime = Date.now()
       try {
         data = await reader.read()
+        console.log(data)
         endTime = Date.now()
       } catch (e) {
         // request aborted
@@ -269,6 +270,7 @@ export class FetchLoader extends EventEmitter {
         retData = data.value
       }
       if (retData && retData.byteLength > 0 || data.done) {
+        console.log(retData,'fetch')
         onProgress(retData, data.done, {
           range: [this._range[0] + this._receivedLength - (retData ? retData.byteLength : 0), this._range[0] + this._receivedLength],
           vid: this._vid,

@@ -276,11 +276,13 @@ export class Flv extends EventEmitter {
         this._mediaLoader?.cancel()
         return
       }
-      const headers = response.headers
-      this.emit(EVENT.TTFB, { url: this._opts.url, responseUrl: response.url, elapsed: st ? (firstByteTime - st) : (endTime - startTime) })
-      this.emit(EVENT.LOAD_RESPONSE_HEADERS, { headers })
-      this._acceptRanges = !!headers?.get('Accept-Ranges') || !!headers?.get('Content-Range')
-      this._firstProgressEmit = true
+      if (!!response?.headers){
+        const headers = response.headers
+        this.emit(EVENT.TTFB, { url: this._opts.url, responseUrl: response.url, elapsed: st ? (firstByteTime - st) : (endTime - startTime) })
+        this.emit(EVENT.LOAD_RESPONSE_HEADERS, { headers })
+        this._acceptRanges = !!headers?.get('Accept-Ranges') || !!headers?.get('Content-Range')
+        this._firstProgressEmit = true
+      }
     }
 
     if (!this._bufferService) return
